@@ -14,4 +14,5 @@ urlpatterns = [
     path('post/<slug:post_slug>/', ShowPost.as_view(), name='post'),
     # path('category/<slug:cat_slug>/', show_category, name='category'),
     path('category/<slug:cat_slug>/', NewsCategory.as_view(), name='category'),
+    path('register/', login, name='register'),
 ]
