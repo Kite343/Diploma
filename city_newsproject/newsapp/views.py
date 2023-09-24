@@ -20,6 +20,7 @@ from .models import *
 #     return render(request, 'newsapp/index.html', context=context)
 
 class NewsHome(ListView):
+    paginate_by = 10
     model = News
     # фреймворк находит шаблон по умолчанию: newsapp/newsapp_list.html
     # переопределим:
@@ -111,6 +112,7 @@ class ShowPost(DetailView):
 #     return render(request, 'newsapp/index.html', context=context)
 
 class NewsCategory(ListView):
+    paginate_by = 4
     model = News
     template_name = 'newsapp/index.html'
     context_object_name = 'posts'
