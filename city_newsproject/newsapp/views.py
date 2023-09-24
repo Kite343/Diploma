@@ -128,9 +128,12 @@ class NewsCategory(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        cat = Category.objects.filter(slug=self.kwargs['cat_slug'])
-        context['title'] = 'Категория - ' + cat[0].name
-        context['cat_selected'] = cat[0].id
+        # cat = Category.objects.filter(slug=self.kwargs['cat_slug'])
+        # context['title'] = 'Категория - ' + cat[0].name
+        # context['cat_selected'] = cat[0].id
+        cat = Category.objects.filter(slug=self.kwargs['cat_slug']).first()
+        context['title'] = 'Категория - ' + cat.name
+        context['cat_selected'] = cat.id
         return context
 
 
