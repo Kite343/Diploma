@@ -4,15 +4,18 @@ html, body {
 	padding: 0;
 	height: 100%;
 	width: 100%;
-	color: #444;
+	/* color: #444; */
+	color: #ef7f7f;
 }
 
 a {
-	color: #0059b2;
+	/* color: #0059b2; */
+	color: #037024;
 	text-decoration: none;
 }
 a:hover {
-	color: #CC0000;
+	/* color: #CC0000; */
+	color: #68f368;
 	text-decoration: underline;
 }
 
@@ -36,7 +39,8 @@ p.link-read-post {
 p.link-read-post a {
 	padding: 10px;
 	min-width: 100px;
-	background: #333671;
+	/* background: #333671; */
+	background: #197e05;
 	color: #fff;
 	text-decoration: none;
 }
@@ -76,7 +80,8 @@ ul.list-articles li {
 .clear {clear: both;}
 
 .header {
-	background: #3F4137;
+	/* background: #3F4137; */
+	background: #8cf081;
 	height: 60px;
 }
 
@@ -91,7 +96,8 @@ ul.mainmenu {
 	margin: 0;
 	padding: 0;
 	height: 60px;
-	color: #fdc073;
+	/* color: #fdc073; */
+	color: #041f08;
 	font-size: 20px;
 	overflow: hidden;
 }
@@ -103,11 +109,13 @@ ul.mainmenu li.logo {margin: 0;}
 ul.mainmenu li.last {float: right;}
 
 ul.mainmenu li a {
-	color: #fdc073;
+	/* color: #fdc073; */
+	color: #072706;
 	text-decoration: none;
 }
 ul.mainmenu li a:hover {
-	color: #FDA83D;
+	/* color: #FDA83D; */
+	color: #071c0a;
 }
 
 .panelitems {
@@ -162,10 +170,13 @@ div.button {
 
 .left-chapters {
 	margin: 0;
-	background: #eee;
+	/* background: #eee;
+	border-right: 1px solid #ccc; */
+	background: #f2fac1;
 	border-right: 1px solid #ccc;
 	min-height: 100%;
 }
+
 .left-chapters ul {
 	width: 230px;
 	min-height: 100%;
@@ -389,42 +400,4 @@ ul.lang-list li a:hover {color: #fdc073;}
 .form-button {
     min-width: 200px;
     font-size: 16px;
-}
-
-.list-pages {
-	text-align: center;
-	margin: 0 0 20px 0;
-}
-.list-pages ul {
-	margin: 20px 0 0 0;
-	padding: 0;
-	list-style: none;
-}
-.list-pages ul li {
-	display: inline-block;
-	margin: 0 20px 0 0;
-}
-.list-pages a {
-	color: #000;
-	font-size: 24px;
-	text-decoration: none;
-}
-.list-pages .page-num, .page-num-selected {
-	display: inline-block;
-	width: 60px;
-	height: 44px;
-	padding: 16px 0 0 0;
-	border: 1px solid #d0d0d0;
-	border-radius: 30px;
-}
-.list-pages .page-num:hover {
-	box-shadow: 3px 3px 1px #d0d0d0; 
-}
-.list-pages .page-num-selected {
-	border: none;
-	color: #000;
-	font-size: 20px;
-}
-.list-pages .page-num-selected:hover {
-	box-shadow: none; 
 }
