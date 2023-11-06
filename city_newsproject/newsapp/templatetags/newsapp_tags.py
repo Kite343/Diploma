@@ -43,6 +43,8 @@ def show_menu(context):
     user_menu = menu.copy()
     if not request.user.is_authenticated:
         user_menu.pop(1)
-    return {'menu': user_menu, 'title_news': title_news}
+    context['menu'] = user_menu
+    context['title_news'] = title_news
+    return context
  
     

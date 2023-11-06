@@ -3,7 +3,10 @@ from django.http import Http404, HttpResponse, HttpResponseNotFound
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
-from django.contrib.auth.forms import UserCreationForm 
+# from django.contrib.auth.forms import UserCreationForm 
+from django.contrib.auth.views import LoginView
+# from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import logout, login
 
 from .forms import *
 
@@ -70,8 +73,24 @@ class AddPage(CreateView):
 def contact(request):
     return HttpResponse("Обратная связь")
  
-def login(request):
-    return HttpResponse("Авторизация")
+# def login(request):
+#     return HttpResponse("Авторизация")
+
+class LoginUser(LoginView):
+    form_class = LoginUserForm
+    template_name = 'newsapp/login.html'
+ 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = "Авторизация"
+        return context
+    
+    def get_success_url(self):
+        return reverse_lazy('home')
+    
+def logout_user(request):
+    logout(request)
+    return redirect('login')
 
 class RegisterUser(CreateView):
     form_class = RegisterUserForm
@@ -83,6 +102,11 @@ class RegisterUser(CreateView):
         context = super().get_context_data(**kwargs)
         context['title'] = "Регистрация"
         return context
+    
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return redirect('home')
 
 # def show_post(request, post_slug):
 #     post = get_object_or_404(News, slug=post_slug)
