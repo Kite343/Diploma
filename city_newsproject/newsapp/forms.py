@@ -2,6 +2,7 @@ from django import forms
 from .models import *
 from django.contrib.auth.forms import UserCreationForm 
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import AuthenticationForm
 
 class AddPostForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -39,3 +40,7 @@ class RegisterUserForm(UserCreationForm):
         if User.objects.filter(email=email).exists():
             raise forms.ValidationError("пользователь с таким email уже зарегистрирован")
         return email
+    
+class LoginUserForm(AuthenticationForm):
+    username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={'class': 'form-input'}))
+    password = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-input'}))
