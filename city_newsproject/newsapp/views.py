@@ -3,8 +3,9 @@ from django.http import Http404, HttpResponse, HttpResponseNotFound
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
+from django.contrib.auth.forms import UserCreationForm 
 
-from newsapp.forms import AddPostForm
+from .forms import *
 
 from .models import *
 
@@ -71,6 +72,17 @@ def contact(request):
  
 def login(request):
     return HttpResponse("Авторизация")
+
+class RegisterUser(CreateView):
+    form_class = RegisterUserForm
+    # form_class = UserCreationForm
+    template_name = 'newsapp/register.html'
+    success_url = reverse_lazy('login')
+ 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = "Регистрация"
+        return context
 
 # def show_post(request, post_slug):
 #     post = get_object_or_404(News, slug=post_slug)
