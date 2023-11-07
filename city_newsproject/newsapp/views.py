@@ -41,9 +41,12 @@ class NewsHome(ListView):
         # cat_selected со значением 0 для выбора нужной рубрики
         context['cat_selected'] = 0
         return context
-    
+
+    # .select_related('cat')
+    # select_related(key) – «жадная» загрузка связанных данных по внешнему ключу key, который имеет тип ForeignKey;
+    # prefetch_related(key) – «жадная» загрузка связанных данных по внешнему ключу key, который имеет тип ManyToManyField.
     def get_queryset(self):
-        return News.objects.filter(is_published=True)
+        return News.objects.filter(is_published=True).select_related('cat')
 
 def about(request):
     return render(request, 'newsapp/about.html', {'title': 'О сайте'})
@@ -156,7 +159,7 @@ class NewsCategory(ListView):
     # allow_empty = False
  
     def get_queryset(self):
-        return News.objects.filter(cat__slug=self.kwargs['cat_slug'], is_published=True)
+        return News.objects.filter(cat__slug=self.kwargs['cat_slug'], is_published=True).select_related('cat')
     
     # def get_context_data(self, *, object_list=None, **kwargs):
     #     context = super().get_context_data(**kwargs)
@@ -169,7 +172,9 @@ class NewsCategory(ListView):
         # cat = Category.objects.filter(slug=self.kwargs['cat_slug'])
         # context['title'] = 'Категория - ' + cat[0].name
         # context['cat_selected'] = cat[0].id
-        cat = Category.objects.filter(slug=self.kwargs['cat_slug']).first()
+        
+        # cat = Category.objects.filter(slug=self.kwargs['cat_slug']).first()
+        cat = Category.objects.get(slug=self.kwargs['cat_slug'])
         context['title'] = 'Категория - ' + cat.name
         context['cat_selected'] = cat.id
         return context
