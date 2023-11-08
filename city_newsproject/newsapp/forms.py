@@ -3,6 +3,7 @@ from .models import *
 from django.contrib.auth.forms import UserCreationForm 
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
+from captcha.fields import CaptchaField
 
 class AddPostForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -30,6 +31,7 @@ class RegisterUserForm(UserCreationForm):
     email = forms.EmailField(label='Email', widget=forms.EmailInput(attrs={'class': 'form-input'}))
     password1 = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-input'}))
     password2 = forms.CharField(label='Повтор пароля', widget=forms.PasswordInput(attrs={'class': 'form-input'}))
+    captcha = CaptchaField(label='Введите текст с картинки')
     
     class Meta:
         model = User
