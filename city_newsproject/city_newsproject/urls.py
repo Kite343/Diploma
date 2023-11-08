@@ -25,6 +25,7 @@ from newsapp.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('newsapp.urls')),
+    path('captcha/', include('captcha.urls')),
 ]
 
 if settings.DEBUG:
