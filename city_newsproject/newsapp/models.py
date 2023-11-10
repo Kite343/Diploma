@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth import get_user_model
 
 class News(models.Model):
     title = models.CharField(max_length=255, verbose_name="Заголовок")
@@ -39,3 +40,17 @@ class Category(models.Model):
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
         ordering = ['id']
+
+class Comment(models.Model):
+    news = models.ForeignKey(News, on_delete=models.CASCADE, related_name='comments')
+    author = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, related_name='user_comments', null=True, default=None)
+    comment = models.TextField(blank=True, verbose_name="Текст комментария")
+    time_create = models.DateTimeField(auto_now_add=True, verbose_name="Время создания")
+
+    class Meta:
+        verbose_name = 'Комментарий'
+        verbose_name_plural = 'Комментарии'
+        ordering = ['-time_create']
+
+    def __str__(self):
+        return f"{self.news.title}: {self.author.get_username}: {self.time_create}"

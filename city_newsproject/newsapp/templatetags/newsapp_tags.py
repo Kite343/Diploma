@@ -47,4 +47,14 @@ def show_menu(context):
     context['title_news'] = title_news
     return context
  
-    
+# заготовка ?
+# @register.inclusion_tag('newsapp/comments_menu.html', takes_context=True)
+# def comments_menu(context):    
+#     comments = Comments.objects.all()
+#     comments['comments'] = comments
+#     return context
+
+# заготовка ?
+@register.inclusion_tag('newsapp/show_comments.html', takes_context=True)
+def show_comments(context):    
+    return context

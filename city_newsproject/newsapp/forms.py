@@ -46,3 +46,21 @@ class RegisterUserForm(UserCreationForm):
 class LoginUserForm(AuthenticationForm):
     username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={'class': 'form-input'}))
     password = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-input'}))
+
+class AddCommentForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    class Meta:
+        model = Comment
+        fields = ['comment', ]
+        widgets = {
+            'comment': forms.Textarea(attrs={'cols': 60, 'rows': 10}),
+        }
+
+    def clean_comment(self):
+        comment = self.cleaned_data['comment']
+        if len(comment) > 600:
+            raise forms.ValidationError('Длина превышает 600 символов')
+ 
+        return comment
