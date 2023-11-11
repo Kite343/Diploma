@@ -1,5 +1,6 @@
 from django import template
 from newsapp.models import *
+from django.shortcuts import get_object_or_404
 
 register = template.Library()
 
@@ -41,7 +42,7 @@ def show_categories(sort=None, cat_selected=0):
 def show_menu(context):    
     request = context['request']
     user_menu = menu.copy()
-    if not request.user.is_authenticated:
+    if not request.user.is_authenticated or not request.user.is_staff:
         user_menu.pop(1)
     context['menu'] = user_menu
     context['title_news'] = title_news
@@ -56,5 +57,17 @@ def show_menu(context):
 
 # заготовка ?
 @register.inclusion_tag('newsapp/show_comments.html', takes_context=True)
-def show_comments(context):    
+def show_comments(context):
+    # print(context)    
+    # request = context['request']
+    post = context['object']
+    print(post)
+    comments = Comment.objects.filter(news=post)
+    # News.objects.filter(is_published=True).select_related('cat')
+    # post = get_object_or_404(News, slug=post_slug)
+    context['comments'] = comments
+    # for i in comments:
+    #     print(i.author)
+    #     print(i.comment)
+    #     print()
     return context

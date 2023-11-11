@@ -137,15 +137,8 @@ class ShowPost(FormMixin, DetailView):
     slug_url_kwarg = 'post_slug'
     # pk_url_kwarg ='pk' ('post_pk')
     context_object_name = 'post'
-    # comment_form = AddCommentForm
     form_class = AddCommentForm
     success_msg = 'Комментарий успешно создан'
-
-    # def get_context_data(self, *, object_list=None, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context['title'] = context['post']
-    #     context['form'] = self.comment_form
-    #     return context
 
     def get_success_url(self, **kwargs):
         return reverse_lazy('post', kwargs={'post_slug':self.get_object().slug})
@@ -164,64 +157,7 @@ class ShowPost(FormMixin, DetailView):
         comment.save()
         messages.success(self.request, self.success_msg)
         return super().form_valid(form)
-
-
-
-
-
-#     def get(self, request, *args, **kwargs):
-#         # ошибка
-#         # news = get_object_or_404(News, id=self.kwargs['news_id'])
-#         news = get_object_or_404(News, slug=self.slug_url_kwarg)
-#         # context = {}
-#         context = super().get_context_data(**kwargs)
-#         context['title'] = context['post']
-#         context.update(csrf(request))
-#         user = auth.get_user(request)
-#         # Помещаем в контекст все комментарии, которые относятся к статье
-#         # попутно сортируя их по пути, ID автоинкрементируемые, поэтому
-#         # проблем с иерархией комментариев не должно возникать 
-#         # context['comments'] = article.comment_set.all().order_by('path')
-#         context['next'] = news.get_absolute_url()
-#         # Будем добавлять форму только в том случае, если пользователь авторизован
-#         # # if user.is_authenticated:
-#         # #     context['form'] = self.comment_form
- 
-#         return render(template_name=self.template_name, context=context)
     
-# @login_required
-# @require_http_methods(["POST"])
-# def add_comment(request, post_slug):
- 
-#     form = AddCommentForm(request.POST)
-#     news = get_object_or_404(News, slug=post_slug)
-
-# # def add_comment(request, news_id):
- 
-# #     form = AddCommentForm(request.POST)
-# #     news = get_object_or_404(News, id=news_id)
- 
-#     if form.is_valid():
-#         comment = Comment()
-#         # comment.path = []
-#         comment.news = news
-#         # comment.author = auth.get_user(request)
-#         comment.comment = form.cleaned_data['comment']
-#         comment.save()
- 
-#         # Django не позволяет увидеть ID комментария по мы не сохраним его, 
-#         # хотя PostgreSQL имеет такие средства в своём арсенале, но пока не будем
-#         # работать с сырыми SQL запросами, поэтому сформируем path после первого сохранения
-#         # и пересохраним комментарий 
-#         # try:
-#         #     comment.path.extend(Comment.objects.get(id=form.cleaned_data['parent_comment']).path)
-#         #     comment.path.append(comment.id)
-#         # except ObjectDoesNotExist:
-#         #     comment.path.append(comment.id)
- 
-#         comment.save()
- 
-#     return redirect(news.get_absolute_url())
 
 # def show_category(request, cat_slug):
 #     cat = get_object_or_404(Category, slug=cat_slug)

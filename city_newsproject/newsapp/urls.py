@@ -23,7 +23,4 @@ urlpatterns = [
     # path('category/<slug:cat_slug>/', show_category, name='category'),
     # path('category/<slug:cat_slug>/', cache_page(60)(NewsCategory.as_view()), name='category'),
     path('category/<slug:cat_slug>/', NewsCategory.as_view(), name='category'),
-    # path(r'^comment/(?P<article_id>[0-9]+)/$', add_comment, name='add_comment'),
-    # re_path(r'^comment/(?P<news_id>[0-9]+)/$', add_comment, name='add_comment'),
-    # path('add_comment/<slug:post_slug>/', add_comment, name='add_comment'),
 ]
