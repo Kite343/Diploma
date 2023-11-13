@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+    <div class="header">
+        <ul id="mainmenu" class="mainmenu">
+        <li class="logo"><a href="{% url 'home' %}"><div class="logo"></div></a></li>
+
+        <li><a href="{% url 'home' %}">news</a></li>
+        <li><a href="{% url 'home' %}">forum</a></li>
+
+
+{% if request.user.is_authenticated %}
+    <li class="last"> {{user.username}} | <a href="{% url 'logout' %}">Выйти</a></li>
+{% else %}
+    <li class="last"><a href="{% url 'register' %}">Регистрация</a> | <a href="{% url 'login' %}">Войти</a></li>
+{% endif %}
+
+        </ul>
+        <div class="clear"></div>
+    </div>
+{% block app %}
+{% endblock %}
+</html>
