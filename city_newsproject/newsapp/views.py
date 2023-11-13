@@ -1,11 +1,19 @@
 from django.http import Http404, HttpResponse, HttpResponseNotFound
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
+from django.views import View
 from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic.edit import FormMixin
 # from django.contrib.auth.forms import UserCreationForm 
 from django.contrib.auth.views import LoginView
 # from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import logout, login
+from django.contrib import auth
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_http_methods
+from django.core.exceptions import ObjectDoesNotExist
+from django.template.context_processors import csrf
+from django.contrib import messages
 
 from .forms import *
 
@@ -121,18 +129,35 @@ class RegisterUser(CreateView):
  
 #     return render(request, 'newsapp/post.html', context=context)
 
-class ShowPost(DetailView):
+# class ShowPost(DetailView):
+class ShowPost(FormMixin, DetailView):
     model = News
     template_name = 'newsapp/post.html'
     # класс DetailView по умолчанию пытается выбрать из указанной модели запись, используя атрибут pk или slug
     slug_url_kwarg = 'post_slug'
     # pk_url_kwarg ='pk' ('post_pk')
     context_object_name = 'post'
+    form_class = AddCommentForm
+    success_msg = 'Комментарий успешно создан'
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = context['post']
-        return context
+    def get_success_url(self, **kwargs):
+        return reverse_lazy('post', kwargs={'post_slug':self.get_object().slug})
+
+    def post(self, request, *args,**kwargs):
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+        
+    def form_valid(self, form):
+        comment = Comment(news = self.get_object(),
+                          author = self.request.user,
+                          comment = form.cleaned_data['comment'],)
+        comment.save()
+        messages.success(self.request, self.success_msg)
+        return super().form_valid(form)
+    
 
 # def show_category(request, cat_slug):
 #     cat = get_object_or_404(Category, slug=cat_slug)

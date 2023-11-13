@@ -1,0 +1,24 @@
+{% block comments %}
+<div>
+комментарии
+
+{% if comments %}
+
+<ul class="list-articles">
+    {% for c in comments %}
+            <li><div class="article-panel">
+                <p class="first">Автор: {{c.author}}</p>
+                <p class="last">Дата: {{c.time_create|date:"d-m-Y H:i:s"}}</p>
+            </div>
+            {{ c.comment }}
+            </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>Комментарии отсутствуют</p>
+
+{% endif %}
+
+</div>
+
+{% endblock comments %}
