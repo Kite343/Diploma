@@ -6,8 +6,8 @@
         <ul id="mainmenu" class="mainmenu">
         <li class="logo"><a href="{% url 'home' %}"><div class="logo"></div></a></li>
 
-        <li><a href="{% url 'home' %}">news</a></li>
-        <li><a href="{% url 'home' %}">forum</a></li>
+        <li><a href="{% url 'home' %}">новости</a></li>
+        <li><a href="{% url 'forum_home' %}">форум</a></li>
 
 
 {% if request.user.is_authenticated %}
