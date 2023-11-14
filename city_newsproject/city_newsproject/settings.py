@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'newsapp.apps.NewsappConfig',
+    'forum_app.apps.ForumAppConfig',
     'captcha',
 ]
 
@@ -59,7 +60,9 @@ ROOT_URLCONF = 'city_newsproject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR / 'templates',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -168,18 +171,20 @@ LOGGING = {'version': 1,
                # логирование всего django-сервера
                'django': {
                    # обработчики логирования (оба)
-                   'handlers': ['console', 'file'],
-                   'level': 'INFO',
+                    'handlers': ['console', 'file'],
+                #    'level': 'INFO',
+                    'level': 'WARNING',
                },
             'newsapp': {
                    # обработчик - только консоль
                    # 'handlers': ['console'],
                    # обработчик - консоль и файл
-                   'handlers': ['console', 'file'],
+                    'handlers': ['console', 'file'],
                 #    'level': 'DEBUG',
-                   'level': 'INFO',
+                #    'level': 'INFO',
+                    'level': 'WARNING',
                    # если есть более вышестоящие логгеры, то их тоже используем
-                   'propagate': True,
+                    'propagate': True,
                },            
            },
            }
