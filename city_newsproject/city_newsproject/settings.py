@@ -171,18 +171,20 @@ LOGGING = {'version': 1,
                # логирование всего django-сервера
                'django': {
                    # обработчики логирования (оба)
-                   'handlers': ['console', 'file'],
-                   'level': 'INFO',
+                    'handlers': ['console', 'file'],
+                #    'level': 'INFO',
+                    'level': 'WARNING',
                },
             'newsapp': {
                    # обработчик - только консоль
                    # 'handlers': ['console'],
                    # обработчик - консоль и файл
-                   'handlers': ['console', 'file'],
+                    'handlers': ['console', 'file'],
                 #    'level': 'DEBUG',
-                   'level': 'INFO',
+                #    'level': 'INFO',
+                    'level': 'WARNING',
                    # если есть более вышестоящие логгеры, то их тоже используем
-                   'propagate': True,
+                    'propagate': True,
                },            
            },
            }
