@@ -55,3 +55,12 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"{self.news.title}: {self.author.get_username}: {self.time_create}"
+    
+class Contact(models.Model):
+    type_contact = models.CharField(max_length=100, db_index=True, verbose_name="Тип контакта")
+    contact = models.CharField(max_length=100, db_index=True, verbose_name="Контакт")
+
+    class Meta:
+        verbose_name = 'Контакт'
+        verbose_name_plural = 'Контакты'
+        ordering = ['type_contact']
