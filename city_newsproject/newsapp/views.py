@@ -82,6 +82,19 @@ class AddPage(CreateView):
  
 def contact(request):
     return HttpResponse("Обратная связь")
+
+class ShowContact(ListView):
+    model = Contact
+    template_name = 'newsapp/contacts.html'
+    context_object_name = 'contacts'
+    
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Контакты'
+        return context
+
+    # def get_queryset(self):
+    #     return News.objects.filter(is_published=True).select_related('cat')
  
 # def login(request):
 #     return HttpResponse("Авторизация")

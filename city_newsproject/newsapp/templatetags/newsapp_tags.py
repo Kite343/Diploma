@@ -71,7 +71,7 @@ def show_comments(context):
 
     paginator = Paginator(comments, 3) 
     page_number = request.GET.get('page')
-    context['comments'] = paginator.get_page(page_number)
+    context['comments_page_obj'] = paginator.get_page(page_number)
     # context['page_obj'] = paginator.get_page(page_number)
     # context['paginator'] = paginator
     # print(context['comments'])

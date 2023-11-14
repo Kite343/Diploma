@@ -1,0 +1,15 @@
+{% extends 'newsapp/base.html' %}
+
+{% block content %}
+<h1>{{title}}</h1>
+<div>  
+    
+    <ul>
+        {% for c in contacts %}
+                <li>
+                {{ c.type_contact }}: {{ c.contact }}
+                </li>
+        {% endfor %}
+    
+</div>
+{% endblock %}
