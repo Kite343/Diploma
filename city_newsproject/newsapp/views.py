@@ -99,37 +99,42 @@ class ShowContact(ListView):
 # def login(request):
 #     return HttpResponse("Авторизация")
 
-class LoginUser(LoginView):
-    form_class = LoginUserForm
-    template_name = 'newsapp/login.html'
- 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = "Авторизация"
-        return context
-    
-    def get_success_url(self):
-        return reverse_lazy('home')
-    
-def logout_user(request):
-    logout(request)
-    return redirect('login')
 
-class RegisterUser(CreateView):
-    form_class = RegisterUserForm
-    # form_class = UserCreationForm
-    template_name = 'newsapp/register.html'
-    success_url = reverse_lazy('login')
+
+# in users
+# class LoginUser(LoginView):
+#     form_class = LoginUserForm
+#     template_name = 'newsapp/login.html'
  
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = "Регистрация"
-        return context
+#     def get_context_data(self, *, object_list=None, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['title'] = "Авторизация"
+#         return context
     
-    def form_valid(self, form):
-        user = form.save()
-        login(self.request, user)
-        return redirect('home')
+#     def get_success_url(self):
+#         return reverse_lazy('home')
+    
+# def logout_user(request):
+#     logout(request)
+#     return redirect('login')
+
+# class RegisterUser(CreateView):
+#     form_class = RegisterUserForm
+#     # form_class = UserCreationForm
+#     template_name = 'newsapp/register.html'
+#     success_url = reverse_lazy('login')
+ 
+#     def get_context_data(self, *, object_list=None, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['title'] = "Регистрация"
+#         return context
+    
+#     def form_valid(self, form):
+#         user = form.save()
+#         login(self.request, user)
+#         return redirect('home')
+# in users
+
 
 # def show_post(request, post_slug):
 #     post = get_object_or_404(News, slug=post_slug)
