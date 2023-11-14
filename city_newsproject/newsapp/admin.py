@@ -26,3 +26,10 @@ class CommentAdmin(admin.ModelAdmin):
     list_display = ('news', 'author', 'comment', 'time_create')   
     list_filter = ('time_create', ) 
     search_fields = ('news', 'author', 'comment', 'time_create')
+
+
+@admin.register(Contact)  
+class ContactAdmin(admin.ModelAdmin):  
+    list_display = ('type_contact', 'contact', )   
+    list_filter = ('type_contact', ) 
+    search_fields = ('type_contact', 'contact', )

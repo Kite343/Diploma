@@ -1,6 +1,7 @@
 from django import template
 from newsapp.models import *
 from django.shortcuts import get_object_or_404
+from django.core.paginator import Paginator
 
 register = template.Library()
 
@@ -60,13 +61,24 @@ def show_menu(context):
 @register.inclusion_tag('newsapp/show_comments.html', takes_context=True)
 def show_comments(context):
     # print(context)    
-    # request = context['request']
+    request = context['request']
+    # print(request)
     post = context['object']
-    print(post)
+    # print(post)
     comments = Comment.objects.filter(news=post)
     # News.objects.filter(is_published=True).select_related('cat')
     # post = get_object_or_404(News, slug=post_slug)
-    context['comments'] = comments
+
+    paginator = Paginator(comments, 3) 
+    page_number = request.GET.get('page')
+    context['comments'] = paginator.get_page(page_number)
+    # context['page_obj'] = paginator.get_page(page_number)
+    # context['paginator'] = paginator
+    # print(context['comments'])
+    
+
+    # context['comments'] = comments
+
     # for i in comments:
     #     print(i.author)
     #     print(i.comment)

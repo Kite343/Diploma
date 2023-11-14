@@ -1,0 +1,64 @@
+{% block comments %}
+<div>
+комментарии
+
+{% if comments %}
+
+<ul class="list-articles">
+    {% for c in comments %}
+            <li><div class="article-panel">
+                <p class="first">Автор: {{c.author}}</p>
+                <p class="last">Дата: {{c.time_create|date:"d-m-Y H:i:s"}}</p>
+            </div>
+            {{ c.comment }}
+            </li>
+    {% endfor %}
+
+</div>
+{% if comments.has_other_pages %}
+    <nav class="list-pages">
+        <ul>
+            {% if comments.has_previous %}
+
+                {% if comments.number > 3 %}
+                <li class="page-num">
+                    <a href="?page=1">&lt;&lt;</a>
+                </li>
+                {% endif %}
+
+            <li class="page-num">
+             <a href="?page={{ comments.previous_page_number }}">&lt;</a>
+            </li>
+            {% endif %}
+
+            {% for p in paginator.page_range %}
+                    {% if comments.number == p %}
+            <li class="page-num page-num-selected">{{ p }}</li>
+                    {% elif p >= comments.number|add:-2 and p <= comments.number|add:2  %}
+            <li class="page-num">
+                <a href="?page={{ p }}">{{ p }}</a>
+            </li>
+                    {% endif %}
+            {% endfor %}
+
+            {% if comments.has_next %}
+            <li class="page-num">
+             <a href="?page={{ comments.next_page_number }}">&gt;</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endif %}
+
+
+    
+
+</ul>
+{% else %}
+<p>Комментарии отсутствуют</p>
+
+{% endif %}
+
+
+
+{% endblock comments %}
