@@ -2,6 +2,14 @@
 <!DOCTYPE html>
 
 <html>
+    <head>
+        <title>{{title}}</title>
+        <link type="text/css" href="{% static 'newsapp/css/styles.css' %}" rel="stylesheet" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <link rel="shortcut icon" href="{% static 'newsapp/images/main.ico' %}" type="image/x-icon"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    
     <div class="header">
         <ul id="mainmenu" class="mainmenu">
         <li class="logo"><a href="{% url 'home' %}"><div class="logo"></div></a></li>
@@ -11,14 +19,17 @@
 
 
 {% if request.user.is_authenticated %}
-    <li class="last"> {{user.username}} | <a href="{% url 'logout' %}">Выйти</a></li>
+    <li class="last"> {{user.username}} | <a href="{% url 'users:logout' %}">Выйти</a></li>
 {% else %}
-    <li class="last"><a href="{% url 'register' %}">Регистрация</a> | <a href="{% url 'login' %}">Войти</a></li>
+    <li class="last"><a href="{% url 'users:register' %}">Регистрация</a> | <a href="{% url 'users:login' %}">Войти</a></li>
 {% endif %}
 
         </ul>
         <div class="clear"></div>
     </div>
+
+
 {% block app %}
 {% endblock %}
+
 </html>

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'newsapp.apps.NewsappConfig',
     'forum_app.apps.ForumAppConfig',
+    "users.apps.UsersConfig",
     'captcha',
 ]
 
@@ -136,6 +137,10 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
+LOGIN_URL = 'users:login'
+
 LOGGING = {'version': 1,
            'disable_existing_loggers': False,
            # форматы логирования
@@ -172,10 +177,21 @@ LOGGING = {'version': 1,
                'django': {
                    # обработчики логирования (оба)
                     'handlers': ['console', 'file'],
-                #    'level': 'INFO',
-                    'level': 'WARNING',
+                   'level': 'INFO',
+                    # 'level': 'WARNING',
                },
             'newsapp': {
+                   # обработчик - только консоль
+                   # 'handlers': ['console'],
+                   # обработчик - консоль и файл
+                    'handlers': ['console', 'file'],
+                #    'level': 'DEBUG',
+                   'level': 'INFO',
+                    # 'level': 'WARNING',
+                   # если есть более вышестоящие логгеры, то их тоже используем
+                    'propagate': True,
+               },
+            'forum_app': {
                    # обработчик - только консоль
                    # 'handlers': ['console'],
                    # обработчик - консоль и файл
@@ -185,7 +201,18 @@ LOGGING = {'version': 1,
                     'level': 'WARNING',
                    # если есть более вышестоящие логгеры, то их тоже используем
                     'propagate': True,
-               },            
+               }, 
+            'users': {
+                   # обработчик - только консоль
+                   # 'handlers': ['console'],
+                   # обработчик - консоль и файл
+                    'handlers': ['console', 'file'],
+                #    'level': 'DEBUG',
+                #    'level': 'INFO',
+                    'level': 'WARNING',
+                   # если есть более вышестоящие логгеры, то их тоже используем
+                    'propagate': True,
+               },           
            },
            }
 
