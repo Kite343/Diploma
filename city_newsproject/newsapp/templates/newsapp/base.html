@@ -70,7 +70,12 @@
 		<li class="page-num">
          <a href="?page={{ page_obj.next_page_number }}">&gt;</a>
 		</li>
+		<li class="page-num">
+            <a href="?page={{ paginator.num_pages }}"> &gt;&gt;</a>
+		</li>
 		{% endif %}
+
+	
     </ul>
 </nav>
 {% endif %}
