@@ -27,6 +27,7 @@ urlpatterns = [
     path('', include('newsapp.urls')),
     path('captcha/', include('captcha.urls')),
     path('forum/', include('forum_app.urls')),
+    path('users/', include('users.urls', namespace="users")),
 ]
 
 if settings.DEBUG:

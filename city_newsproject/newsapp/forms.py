@@ -26,27 +26,27 @@ class AddPostForm(forms.ModelForm):
             raise forms.ValidationError('Длина превышает 200 символов')
  
         return title
+# in users
+# class RegisterUserForm(UserCreationForm):
+#     username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={'class': 'form-input'}))
+#     email = forms.EmailField(label='Email', widget=forms.EmailInput(attrs={'class': 'form-input'}))
+#     password1 = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-input'}))
+#     password2 = forms.CharField(label='Повтор пароля', widget=forms.PasswordInput(attrs={'class': 'form-input'}))
+#     captcha = CaptchaField(label='Введите текст с картинки')
     
-class RegisterUserForm(UserCreationForm):
-    username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={'class': 'form-input'}))
-    email = forms.EmailField(label='Email', widget=forms.EmailInput(attrs={'class': 'form-input'}))
-    password1 = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-input'}))
-    password2 = forms.CharField(label='Повтор пароля', widget=forms.PasswordInput(attrs={'class': 'form-input'}))
-    captcha = CaptchaField(label='Введите текст с картинки')
-    
-    class Meta:
-        model = User
-        fields = ('username', 'email', 'password1', 'password2')
+#     class Meta:
+#         model = User
+#         fields = ('username', 'email', 'password1', 'password2')
 
-    def clean_email(self):
-        email = self.cleaned_data['email']
-        if User.objects.filter(email=email).exists():
-            raise forms.ValidationError("пользователь с таким email уже зарегистрирован")
-        return email
+#     def clean_email(self):
+#         email = self.cleaned_data['email']
+#         if User.objects.filter(email=email).exists():
+#             raise forms.ValidationError("пользователь с таким email уже зарегистрирован")
+#         return email
     
-class LoginUserForm(AuthenticationForm):
-    username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={'class': 'form-input'}))
-    password = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-input'}))
+# class LoginUserForm(AuthenticationForm):
+#     username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={'class': 'form-input'}))
+#     password = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-input'}))
 
 class AddCommentForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
