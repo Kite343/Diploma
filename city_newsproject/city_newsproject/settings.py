@@ -141,6 +141,8 @@ LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 LOGIN_URL = 'users:login'
 
+AUTH_USER_MODEL = 'users.User'
+
 LOGGING = {'version': 1,
            'disable_existing_loggers': False,
            # форматы логирования
@@ -170,6 +172,7 @@ LOGGING = {'version': 1,
                    # 'filename': '/path/to/django.log',
                    'filename': './log/django.log',
                    'formatter': 'verbose', # добавлен параметр formatter
+                   'level': 'INFO',
                },
            },
            'loggers': {
@@ -180,7 +183,7 @@ LOGGING = {'version': 1,
                    'level': 'INFO',
                     # 'level': 'WARNING',
                },
-            'newsapp': {
+                'newsapp': {
                    # обработчик - только консоль
                    # 'handlers': ['console'],
                    # обработчик - консоль и файл
@@ -191,7 +194,7 @@ LOGGING = {'version': 1,
                    # если есть более вышестоящие логгеры, то их тоже используем
                     'propagate': True,
                },
-            'forum_app': {
+                'forum_app': {
                    # обработчик - только консоль
                    # 'handlers': ['console'],
                    # обработчик - консоль и файл
@@ -202,7 +205,7 @@ LOGGING = {'version': 1,
                    # если есть более вышестоящие логгеры, то их тоже используем
                     'propagate': True,
                }, 
-            'users': {
+                'users': {
                    # обработчик - только консоль
                    # 'handlers': ['console'],
                    # обработчик - консоль и файл

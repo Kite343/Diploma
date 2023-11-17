@@ -1,4 +1,5 @@
-from django.http import Http404, HttpResponse, HttpResponseNotFound
+from typing import Any
+from django.http import Http404, HttpRequest, HttpResponse, HttpResponseNotFound
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views import View
@@ -14,10 +15,15 @@ from django.views.decorators.http import require_http_methods
 from django.core.exceptions import ObjectDoesNotExist
 from django.template.context_processors import csrf
 from django.contrib import messages
+from django.contrib.auth import get_user_model
 
 from .forms import *
 
 from .models import *
+
+import logging
+
+logger = logging.getLogger(__name__)
 
 # def index(request):
 #     posts = News.objects.all()
@@ -69,6 +75,7 @@ def about(request):
  
 #     return render(request, 'newsapp/addpage.html', {'title': 'Добавление статьи', 'form': form})
 
+
 class AddPage(CreateView):
     form_class = AddPostForm
     template_name = 'newsapp/addpage.html'
@@ -79,9 +86,14 @@ class AddPage(CreateView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Добавление статьи'
         return context
+
+    def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
+        user = request.user      
+        logger.info(f"addpage {user.get_username()} {user.email} title: {request.POST.__getitem__('title')}")
+        return super().post(request, *args, **kwargs)
  
-def contact(request):
-    return HttpResponse("Обратная связь")
+# def contact(request):
+#     return HttpResponse("Обратная связь")
 
 class ShowContact(ListView):
     model = Contact
@@ -162,11 +174,13 @@ class ShowPost(FormMixin, DetailView):
         return reverse_lazy('post', kwargs={'post_slug':self.get_object().slug})
 
     def post(self, request, *args,**kwargs):
+        self.object = self.get_object()
         form = self.get_form()
         if form.is_valid():
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
+            
         
     def form_valid(self, form):
         comment = Comment(news = self.get_object(),
@@ -174,7 +188,15 @@ class ShowPost(FormMixin, DetailView):
                           comment = form.cleaned_data['comment'],)
         comment.save()
         messages.success(self.request, self.success_msg)
+        logger.info(f"addcomment news: {comment.news} user: {comment.author}")
         return super().form_valid(form)
+    
+    # def form_invalid(self, form, **kwargs):
+    #     context = self.get_context_data(**kwargs)
+    #     context['form'] = form
+    #     # return self.render_to_response(context)
+    #     return super().form_invalid(form)
+
     
 
 # def show_category(request, cat_slug):

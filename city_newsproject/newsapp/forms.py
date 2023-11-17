@@ -63,5 +63,4 @@ class AddCommentForm(forms.ModelForm):
         comment = self.cleaned_data['comment']
         if len(comment) > 600:
             raise forms.ValidationError('Длина превышает 600 символов')
- 
         return comment
