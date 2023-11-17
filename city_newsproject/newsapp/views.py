@@ -80,8 +80,8 @@ class AddPage(CreateView):
         context['title'] = 'Добавление статьи'
         return context
  
-def contact(request):
-    return HttpResponse("Обратная связь")
+# def contact(request):
+#     return HttpResponse("Обратная связь")
 
 class ShowContact(ListView):
     model = Contact

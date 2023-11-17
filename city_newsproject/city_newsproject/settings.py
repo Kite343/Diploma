@@ -141,6 +141,8 @@ LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 LOGIN_URL = 'users:login'
 
+AUTH_USER_MODEL = 'users.User'
+
 LOGGING = {'version': 1,
            'disable_existing_loggers': False,
            # форматы логирования
