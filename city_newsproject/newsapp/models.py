@@ -64,3 +64,17 @@ class Contact(models.Model):
         verbose_name = 'Контакт'
         verbose_name_plural = 'Контакты'
         ordering = ['type_contact']
+
+class About(models.Model):
+    title = models.CharField(max_length=255, verbose_name="Заголовок", blank=True)
+    content = models.TextField(verbose_name="Текст")
+    photo_1 = models.ImageField(upload_to="about/%Y/%m/%d/", verbose_name="Фото 1", blank=True)
+    photo_2 = models.ImageField(upload_to="about/%Y/%m/%d/", verbose_name="Фото 2", blank=True)
+    photo_3 = models.ImageField(upload_to="about/%Y/%m/%d/", verbose_name="Фото 3", blank=True)
+    is_published = models.BooleanField(default=True, verbose_name="Публикация")
+    position = models.IntegerField(unique=True)
+
+    class Meta:
+        verbose_name = 'контент о сайте'
+        verbose_name_plural = 'контент о сайте'
+        ordering = ['position']

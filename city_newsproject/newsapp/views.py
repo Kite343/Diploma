@@ -63,6 +63,19 @@ class NewsHome(ListView):
 
 def about(request):
     return render(request, 'newsapp/about.html', {'title': 'О сайте'})
+
+class AboutView(ListView):
+    model = About
+    # фреймворк находит шаблон по умолчанию: newsapp/newsapp_list.html
+    # переопределим:
+    template_name = 'newsapp/about.html'
+    # по умолчанию в шаблон передается object_list
+    context_object_name = 'content'
+    # # только статические, неизменямые данные:
+    extra_context = {'title': 'О сайте'}
+
+    def get_queryset(self):
+        return About.objects.filter(is_published=True)
  
 # def addpage(request):
 #     if request.method == 'POST':
