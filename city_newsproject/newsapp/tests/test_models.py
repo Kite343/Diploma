@@ -2,6 +2,7 @@ from django.test import TestCase
 from ..models import *
 
 class NewsModelTest(TestCase):
+    """Тест Модели NewsModel"""
 
     def setUp(self):
         # Category.objects.create(name = 'test_news',
@@ -79,3 +80,11 @@ class NewsModelTest(TestCase):
 
     def test_get_absolute_url(self):
         self.assertEquals(self.news.get_absolute_url(), f'/post/{self.news.slug}/')
+
+    def test_create_news(self):
+        self.assertEqual(self.news.title, 'test NewsModel')
+        self.assertEqual(self.news.cat, self.cat)
+
+    def test_news_str(self):
+        
+        self.assertEqual(str(self.news), 'test NewsModel')
