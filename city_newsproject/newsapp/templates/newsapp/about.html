@@ -2,5 +2,30 @@
 
 {% block content %}
 <h1>{{title}}</h1>
-<p>Содержимое страницы о сайте находится в разработке
+<ul >
+	{% for c in content %}
+	<li style="list-style-type: none;">
+        {% if c.title %}
+            <h3>{{c.title}}</h3>
+        {% endif %}
+
+        <p>{{c.content}}</p>
+        
+         <p align="center">  
+        {% if c.photo_1 %}
+		    <img width="25%" height="150" hspace="10" vspace="10" src="{{c.photo_1.url}}">
+        {% endif %}
+                
+        {% if c.photo_2 %}
+		    <img width="25%" height="150" hspace="10" vspace="10" src="{{c.photo_2.url}}">
+        {% endif %}
+                
+        {% if c.photo_3 %}
+		    <img width="25%" height="150" hspace="10" vspace="15" src="{{c.photo_3.url}}">
+        {% endif %}
+        </p>         
+        
+	</li>
+	{% endfor %}
+</ul>
 {% endblock %}
