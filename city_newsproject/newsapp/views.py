@@ -238,7 +238,9 @@ class NewsCategory(ListView):
         # context['cat_selected'] = cat[0].id
         
         # cat = Category.objects.filter(slug=self.kwargs['cat_slug']).first()
-        cat = Category.objects.get(slug=self.kwargs['cat_slug'])
+        
+        # cat = Category.objects.get(slug=self.kwargs['cat_slug'])
+        cat = get_object_or_404(Category, slug=self.kwargs['cat_slug'])
         context['title'] = 'Категория - ' + cat.name
         context['cat_selected'] = cat.id
         return context
