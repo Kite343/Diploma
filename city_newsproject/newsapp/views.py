@@ -61,8 +61,8 @@ class NewsHome(ListView):
     def get_queryset(self):
         return News.objects.filter(is_published=True).select_related('cat')
 
-def about(request):
-    return render(request, 'newsapp/about.html', {'title': 'О сайте'})
+# def about(request):
+#     return render(request, 'newsapp/about.html', {'title': 'О сайте'})
 
 class AboutView(ListView):
     model = About
