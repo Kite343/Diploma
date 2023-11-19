@@ -5,7 +5,7 @@ from ..models import *
 class AddPostFormTest(TestCase):
     """Тест формы AddPost"""
     def setUp(self):
-        self.cat =Category.objects.create(name = 'test_news',
+        self.cat = Category.objects.create(name = 'test_news',
                                 slug = 'test_news')
         self.cat.save()
 
