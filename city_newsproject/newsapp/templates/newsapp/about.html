@@ -9,7 +9,7 @@
             <h3>{{c.title}}</h3>
         {% endif %}
 
-        <p>{{c.content}}</p>
+        {{c.content|linebreaks}}
         
          <p align="center">  
         {% if c.photo_1 %}
