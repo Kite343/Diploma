@@ -67,7 +67,7 @@ class Contact(models.Model):
 
 class About(models.Model):
     title = models.CharField(max_length=255, verbose_name="Заголовок", blank=True)
-    content = models.TextField(verbose_name="Текст")
+    content = models.TextField(verbose_name="Текст", blank=True)
     photo_1 = models.ImageField(upload_to="about/%Y/%m/%d/", verbose_name="Фото 1", blank=True)
     photo_2 = models.ImageField(upload_to="about/%Y/%m/%d/", verbose_name="Фото 2", blank=True)
     photo_3 = models.ImageField(upload_to="about/%Y/%m/%d/", verbose_name="Фото 3", blank=True)
