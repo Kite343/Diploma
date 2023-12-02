@@ -42,12 +42,10 @@ class NewsHomeTest(TestCase):
         response = self.client.get(reverse('home'))
         self.assertTrue('is_paginated' in response.context)
         self.assertTrue(response.context['is_paginated'] == True)
-        # self.assertTrue( len(response.context['posts']) == 10)
         self.assertEqual(len(response.context['posts']), 10)
 
     def test_last_page(self): 
-        response = self.client.get(reverse('home') + '?page=3') 
-        # self.assertTrue( len(response.context['posts']) == 2)  
+        response = self.client.get(reverse('home') + '?page=3')  
         self.assertEqual(len(response.context['posts']), 2)
 
     def test_menu_guest_client(self):
@@ -94,31 +92,6 @@ class AddPageTest(TestCase):
         response = self.client.post(reverse('add_page'), data)        
         self.assertFormError(response, 'form', "slug",
                               'Значение должно состоять только из латинских букв, цифр, знаков подчеркивания или дефиса.')
-        
-
-        # # не получается
-        # print(Category.objects.all())
-        # response = self.client.get(reverse('add_page'))
-        # self.assertEqual(response.status_code, 200)
-        # # cats = Category.objects.all()
-        # # data={"title": "test valid", "slug": "test_valid", "content": "", 'cat': 'test_news'}
-        # data={"title": "test valid", "slug": "test_valid", "content": "",
-        #        'cat': self.cat
-        #        }
-        # # data={"title": "test valid", "slug": "test_add_page", "content": "", "cat": cats[0]}
-        # # response = self.client.post(reverse('add_page'), data, follow=True)
-        # response = self.client.post(reverse('add_page'), data , follow=True)
-        # print(response.context['form'].errors)
-        # # self.assertEqual(response.status_code, 201)
-        # # print(response.context)
-        # # self.assertRedirects(response, reverse('home') )
-        # print(News.objects.last())
-        # news = News.objects.filter(slug=data['slug']).first()
-        # print(news)
-           
-        # # self.assertEqual(news.title, data['test valid'])
-        # # self.assertEqual(news.cat, self.cat)
-
         user.delete()
 
     

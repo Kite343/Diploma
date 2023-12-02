@@ -5,9 +5,6 @@ class NewsModelTest(TestCase):
     """Тест Модели NewsModel"""
 
     def setUp(self):
-        # Category.objects.create(name = 'test_news',
-        #                         slug = 'test_news')
-        # cat = Category.objects.filter(slug='test_news').first()
         self.cat =Category.objects.create(name = 'test_news',
                                 slug = 'test_news')
         self.cat.save()
