@@ -115,11 +115,11 @@ git clone https://github.com/Kite343/Diploma.git
 
 * Настройка веб-приложения
 
-    1. На вкладке настроек веб-приложения найти раздел Virtualenv и указать путь до окружения
+    - 1\. На вкладке настроек веб-приложения найти раздел Virtualenv и указать путь до окружения
         ```
         /home/username/.virtualenvs/virtualenv
         ```
-    2. Отредактировать wsgi файл, ссылка на который находится в разделе Code.
+    - 2\. Отредактировать wsgi файл, ссылка на который находится в разделе Code.
     Заменить его содержимое на:
         ```
         import os
@@ -141,28 +141,28 @@ git clone https://github.com/Kite343/Diploma.git
         application = get_wsgi_application()
         ```
 
-    3. Сохранить "секреты" в окружении: проверить, что мы находимся в той же директории, что указана в wsgi файле в для переменной project_folder и выполнить команды:
+    - 3\. Сохранить "секреты" в окружении: проверить, что мы находимся в той же директории, что указана в wsgi файле в для переменной project_folder и выполнить команды:
         ```
         echo "export SECRET_KEY=<secret_key>" >> .env
         echo "export MYSQL_PASSWORD=<db_password>" >> .env
         ```
-    4. Настроить доступ к переменным
+    - 4\. Настроить доступ к переменным
         ```
         echo 'set -a; source ~/myproject/.env; set +a' >> ~/.virtualenvs/virtualenv/bin/postactivate
         ```
-    5. Выйти из консоли командой exit. На вкладке Web в разделе Virtualenv кликом по кнопке Start открываем консоль и применяем миграции к БД
+    - 5\. Выйти из консоли командой exit. На вкладке Web в разделе Virtualenv кликом по кнопке Start открываем консоль и применяем миграции к БД
         ```
         python manage.py migrate
         ```
-    6. Создать суперпользователя
+    - 6\. Создать суперпользователя
         ```
         python manage.py createsuperuser
         ```
-    7. Собрать статические файлы проекта и приложений в одном месте:
+    - 7\. Собрать статические файлы проекта и приложений в одном месте:
         ```
         python manage.py collectstatic
         ```
-    8. На вкладке Web в раздел Static files в поле URL в первой строке записать /static/, во второй /media/. В поле Directory в первой строке /home/username/news_project/city_newsproject/static, во второй /home/username/news_project/city_newsproject/media
-    9. В разделе Files в папке news_project/city_newsproject добавить папку log
-    10. Перезагрузить сервер
+    - 8\. На вкладке Web в раздел Static files в поле URL в первой строке записать /static/, во второй /media/. В поле Directory в первой строке /home/username/news_project/city_newsproject/static, во второй /home/username/news_project/city_newsproject/media
+    - 9\. В разделе Files в папке news_project/city_newsproject добавить папку log
+    - 10\. Перезагрузить сервер
 
