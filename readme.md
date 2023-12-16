@@ -108,10 +108,10 @@ git clone https://github.com/Kite343/Diploma.git
 
     на вкладке Dashboard выбрать пункт Web apps и
 и нажать кнопку Add a new web app
-  1. Подтвердить доменное имя для бесплатного профиля кнопкой Next
-  2. Выбирать пункт Manual configuration (including virtualenvs)
-  3. Выбирать последнюю из доступных версий Python
-  4. Подтвердить выбор очередным нажатием Next
+  1.  Подтвердить доменное имя для бесплатного профиля кнопкой Next
+  2.  Выбирать пункт Manual configuration (including virtualenvs)
+  3.  Выбирать последнюю из доступных версий Python
+  4.  Подтвердить выбор очередным нажатием Next
 
 * Настройка веб-приложения
 
