@@ -18,17 +18,17 @@ Python, Django, Git, Visual Studio Code
 
 ## Локальный запуск проекта
 
-### 1) Создать виртуальное окружение
+### 1 Создать виртуальное окружение
 
-### 2) Установить зависимости
+### 2 Установить зависимости
 
     pip install -r requirements.txt
 
-### 3) Выполнить миграции
+### 3 Выполнить миграции
 
     python manage.py migrate    
 
-### 4) Создать суперпользователя
+### 4 Создать суперпользователя
 
     python manage.py createsuperuser
 
@@ -37,7 +37,7 @@ Python, Django, Git, Visual Studio Code
     python manage.py runserver
 
 # Развертывание проекта на сервере www.pythonanywhere.com
-### 1) Внести изменения в файл settings.py
+### 1 Внести изменения в файл settings.py
 * выключить режим отладки
     ```
    DEBUG = False
@@ -65,7 +65,7 @@ Python, Django, Git, Visual Studio Code
     STATIC_ROOT = BASE_DIR / 'static/'
     ```
 
-### 2) Настроить подключение к базе данных
+### 2 Настроить подключение к базе данных
 * Открыть раздел базы данных на хосте, придумать пароль для доступа к БД, дождаться завершения инициализации БД. По умолчанию создается БД username$default. Кликнув по имени, открываем консоль MySQL и вводим команду для смены кодировки на  UTF-8:
     ```
     ALTER DATABASE username$default CHARACTER SET utf8 COLLATE utf8_general_ci;
@@ -87,14 +87,14 @@ Python, Django, Git, Visual Studio Code
     }
     ```
 
-### 3) Клонировать репозиторий
+### 3 Клонировать репозиторий
 Перейти на вкладку Dashboard и открыть Bash консоль 
 Воспользоваться коммандой
 ```
 git clone https://github.com/Kite343/Diploma.git
 ```
 
-### 4) Настройка проекта на сервере
+### 4 Настройка проекта на сервере
 * в Bash консоли запустить команду на создание виртуального окружения
     ```
     mkvirtualenv --python=/usr/bin/python3.10 virtualenv
