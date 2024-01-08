@@ -5,6 +5,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
 from django.views.generic.edit import FormMixin
 from django.contrib import messages
+from django.core.paginator import Paginator
 
 from .forms import *
 
@@ -84,10 +85,33 @@ class ShowPost(FormMixin, DetailView):
     form_class = AddCommentForm
     success_msg = 'Комментарий успешно создан'
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'news'
+        ## test
+        # print(context)
+        # print(dir(context))
+        # print(dir(context['view']))
+        # print(dir(context['object']))
+        # print(dir(context['form']))
+        # print(context['view'].__dict__)
+        # print(context['view'].request)
+        # print(self.request)
+        # print(self.model)
+        post = context['object']
+        comments = Comment.objects.filter(news=post)
+
+        paginator = Paginator(comments, 3) 
+        page_number = self.request.GET.get('page')
+        context['comments_page_obj'] = paginator.get_page(page_number)
+        
+        return context
+
     def get_success_url(self, **kwargs):
         return reverse_lazy('post', kwargs={'post_slug':self.get_object().slug})
 
-    def post(self, request, *args,**kwargs):
+    # def post(self, request, *args,**kwargs):
+    def post(self, *args,**kwargs):
         self.object = self.get_object()
         form = self.get_form()
         if form.is_valid():

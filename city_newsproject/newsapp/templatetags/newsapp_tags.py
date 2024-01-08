@@ -31,13 +31,16 @@ def show_menu(context):
     context['title_news'] = title_news
     return context
  
-@register.inclusion_tag('newsapp/show_comments.html', takes_context=True)
-def show_comments(context):   
-    request = context['request']
-    post = context['object']
-    comments = Comment.objects.filter(news=post)
+# @register.inclusion_tag('newsapp/show_comments.html', takes_context=True)
+# def show_comments(context):   
+#      # test
+#     print('teg', context['request'])
 
-    paginator = Paginator(comments, 3) 
-    page_number = request.GET.get('page')
-    context['comments_page_obj'] = paginator.get_page(page_number)
-    return context
+#     request = context['request']
+#     post = context['object']
+#     comments = Comment.objects.filter(news=post)
+
+#     paginator = Paginator(comments, 3) 
+#     page_number = request.GET.get('page')
+#     context['comments_page_obj'] = paginator.get_page(page_number)
+#     return context
