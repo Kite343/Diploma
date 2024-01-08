@@ -1,0 +1,48 @@
+{% extends 'newsapp/base.html' %}
+<!-- test -->
+{% load newsapp_tags %}
+
+{% block content %}
+
+<div class="content-text" >
+<h1>{{post.title}}</h1>
+
+{% if post.photo %}
+<p><img class="img-article-left" src="{{post.photo.url}}"></p>
+{% endif %}
+
+{{post.content|linebreaks}}
+</div>
+
+{% if request.user.is_authenticated %}
+
+<div style="border: 1px solid #c5bdbd; box-shadow: 2px 2px 0px 0px #29150b; 
+display: inline-block; padding: 10px;"  align = "right">
+
+
+<form method="post">
+    {% csrf_token %}
+    <div class="form-error">{{ form.non_field_errors }}</div>
+ 
+    {% for f in form %}
+    <p><label class="form-label" for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}</p>
+    <div class="form-error">{{ f.errors }}</div>
+    {% endfor %}
+    <p><button type="submit" >Добавить</button></p>
+</form>
+
+
+    {% if messages %}
+    <div>
+        {% for m in messages %}
+            {{m}}
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+
+{% endif %}
+
+{% show_comments %}
+
+{% endblock %}
