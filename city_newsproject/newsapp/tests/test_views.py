@@ -80,6 +80,7 @@ class AddPageTest(TestCase):
         self.assertTemplateUsed(response, 'newsapp/addpage.html', error_name)
 
     def test_forms(self):
+        """Тест формы на странице добавления статьи"""
         user = get_user_model().objects.create_user(
             username='abc', email='abc@gmail.com', password='1234', is_staff = True)
         user.save()
@@ -92,6 +93,32 @@ class AddPageTest(TestCase):
         response = self.client.post(reverse('add_page'), data)        
         self.assertFormError(response, 'form', "slug",
                               'Значение должно состоять только из латинских букв, цифр, знаков подчеркивания или дефиса.')
+        
+         # # не получается
+        print(Category.objects.all())
+        response = self.client.get(reverse('add_page'))
+        self.assertEqual(response.status_code, 200)
+        cats = Category.objects.all()
+        # data={"title": "test valid", "slug": "test_valid", "content": "", 'photo': "", 'cat': 'test_news'}
+        # data={"title": "test valid aaaaaaa", "slug": "test_valid", "content": "", 'photo': "", 'cat': 1}
+        # data={"title": "test valid", "slug": "test_valid", "content": "", 'photo': "",
+        #        'cat': self.cat
+        #        }
+        data={"title": "test valid aaaaa", "slug": "test_add_page", "content": "", "cat": cats[0].id}
+        # response = self.client.post(reverse('add_page'), data, follow=True)
+        response = self.client.post(reverse('add_page'), data , follow=True)
+        # print(response.context['form'].errors)
+        # print(response.context['form'])
+        # self.assertEqual(response.status_code, 201)
+        print(response.context)
+        self.assertRedirects(response, reverse('home') )
+        print(News.objects.last())
+        news = News.objects.filter(slug=data['slug']).first()
+        print(news)
+
+        # self.assertEqual(news.title, data['test valid'])
+        self.assertEqual(news.cat, self.cat)
+        news.delete()
         user.delete()
 
     
